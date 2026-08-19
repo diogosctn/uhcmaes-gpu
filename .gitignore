@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# Resultados de inversão / logs
+Results_UHCMAES_py/
+Results_UHCMAES*/
+out_matlab.mat
+out_python.mat
+compare_report.txt
+compare_fig*.png
+*.log
+
+# Octave/MATLAB temporários
+octave-workspace
+*.octaverc
+
+# SO
+.DS_Store
+Thumbs.db
+
+# Dados grandes (opcional — descomente se não quiser versionar o .mat de exemplo)
+# examples/*.mat

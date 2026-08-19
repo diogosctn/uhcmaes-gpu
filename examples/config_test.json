@@ -1,0 +1,41 @@
+{
+  "files": {
+    "input_filename": "synthetic_data.mat",
+    "data_folder": "/home/ubuntu/uhcmaes_py/"
+  },
+  "physics": {
+    "nvars": 3,
+    "theta_angles": "[10 20 30]",
+    "wavelet_freq": 30.0,
+    "wavelet_ntw": 32,
+    "prior_filter_order": 3,
+    "prior_cutoff_freq": 0.08,
+    "correlation_length_factor": 5,
+    "normalization": {
+      "method": "standard"
+    }
+  },
+  "cmaes": {
+    "sigma_initial": 0.3,
+    "stop_generations": 400,
+    "stop_tol_diversity": 1e-06,
+    "reg_type": "5_exp001",
+    "gen_method": "cmaes",
+    "stop_criteria": {
+      "method": "relative_error",
+      "threshold": 0.02,
+      "stagnation_window": 60
+    }
+  },
+  "uh": {
+    "r_lambda": 0.3,
+    "theta_uh": 0.2,
+    "alpha_t": 1.2,
+    "alpha_sigma": 0.9,
+    "cs_uh": 0.3,
+    "t_eval_initial": 2,
+    "t_min": 1,
+    "t_max": 50,
+    "noise_level": 0.005
+  }
+}
