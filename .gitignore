@@ -28,3 +28,5 @@ Thumbs.db
 
 # Dados grandes (opcional — descomente se não quiser versionar o .mat de exemplo)
 # examples/*.mat
+examples/UNISIM_IL118
+*.db

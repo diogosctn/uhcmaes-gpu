@@ -1,0 +1,45 @@
+{
+    "files": {
+        "input_filename": "data_segy_IL118_XL229.mat",
+        "data_folder": "../examples/"
+    },
+    "physics": {
+        "nvars": 3,
+        "theta_angles": "[10 20 30]",
+        "wavelet_freq": 25,
+        "wavelet_ntw": 32,
+        "prior_filter_order": 3,
+        "prior_cutoff_freq": 0.1,
+        "correlation_length_factor": 5,
+        "normalization": {
+            "method": "linear"
+        }
+    },
+    "cmaes": {
+        "sigma_initial": 4.577122958884816,
+        "stop_generations": 5000,
+        "stop_tol_diversity": 0.06568869548309338,
+        "reg_type": "5_exp1",
+        "gen_method": "cmaes",
+        "stop_criteria": {
+            "method": "diversity",
+            "threshold": 0.06758428466910905,
+            "stagnation_window": 125
+        }
+    },
+    "uh": {
+        "r_lambda": 0.3468031101336386,
+        "theta_uh": 0.32809568286333224,
+        "alpha_t": 1.1200524562078669,
+        "alpha_sigma": 0.7377062321180685,
+        "cs_uh": 0.3316615337992439,
+        "t_eval_initial": 11,
+        "t_min": 6,
+        "t_max": 23,
+        "noise_level": 0.010279448722518259
+    },
+    "compare": {
+        "seed": 42,
+        "n_gen_compare": 5
+    }
+}

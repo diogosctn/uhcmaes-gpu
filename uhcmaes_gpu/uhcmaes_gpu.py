@@ -27,6 +27,9 @@ Estrutura do loop (idêntica ao MATLAB):
 import csv
 import json
 import os
+from pathlib import Path
+import random
+import string
 import time
 from datetime import datetime
 
@@ -35,7 +38,7 @@ import scipy.io as sio
 import torch
 from scipy.signal import butter, filtfilt
 
-from seismic_physics import SeismicPhysicsGPU
+from .seismic_physics import SeismicPhysicsGPU
 
 
 # ==========================================================================
@@ -76,8 +79,11 @@ def _reg_weight(reg_type, generation, sigma):
 # ==========================================================================
 # Algoritmo principal
 # ==========================================================================
-def run_uhcmaes_gpu(cfg, mat_data_path, device="cuda", dtype=torch.float64,
-                    results_folder="Results_UHCMAES_py", seed=None, verbose_every=25):
+def run_uhcmaes_gpu(cfg, mat_data_path, results_folder, device="cuda",
+                    dtype=torch.float64, 
+                    seed=None, 
+                    verbose_every=25
+                ):
     """Executa a inversão UH-CMA-ES.
 
     Parâmetros
@@ -219,8 +225,11 @@ def run_uhcmaes_gpu(cfg, mat_data_path, device="cuda", dtype=torch.float64,
     # ------------------------------------------------------------------
     # 7. Logs / pastas (como no MATLAB)
     # ------------------------------------------------------------------
-    timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-    run_folder = os.path.join(results_folder, timestamp)
+    unique_hash = "".join(random.choices(string.ascii_lowercase, k=4))
+    timestamp = f"{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}_{unique_hash}"
+
+    run_folder = (Path(results_folder) / timestamp).as_posix()
+
     os.makedirs(run_folder, exist_ok=True)
     csv_path = os.path.join(run_folder, "log_execucao.csv")
     mat_path = os.path.join(run_folder, "run_data.mat")
@@ -460,6 +469,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="UH-CMA-ES GPU para inversão sísmica")
     parser.add_argument("--config", default="config.json", help="caminho do config.json")
     parser.add_argument("--data", default=None, help="caminho do .mat (sobrescreve o config)")
+    parser.add_argument("--results_folder", default="Results_UHCMAES_py", help="Diretório para armazenar resultado")
     parser.add_argument("--device", default="cuda", help="'cuda' ou 'cpu'")
     parser.add_argument("--dtype", default="float64", choices=["float64", "float32"])
     parser.add_argument("--seed", type=int, default=None)
@@ -472,5 +482,5 @@ if __name__ == "__main__":
     if data_path is None:
         data_path = os.path.join(cfg["files"]["data_folder"], cfg["files"]["input_filename"])
 
-    run_uhcmaes_gpu(cfg, data_path, device=args.device,
+    run_uhcmaes_gpu(cfg, data_path, args.results_folder, device=args.device,
                     dtype=getattr(torch, args.dtype), seed=args.seed)

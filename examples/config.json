@@ -1,7 +1,7 @@
 {
   "files": {
     "input_filename": "data_segy_IL118_XL229.mat",
-    "data_folder": "./"
+    "data_folder": "./examples/"
   },
   "physics": {
     "nvars": 3,
@@ -14,14 +14,14 @@
     "normalization": { "method": "standard" }
   },
   "cmaes": {
-    "sigma_initial": 0.3,
-    "stop_generations": 120,
+    "sigma_initial": 3,
+    "stop_generations": 2000,
     "stop_tol_diversity": 1e-6,
     "reg_type": "5_exp001",
     "gen_method": "cmaes",
     "stop_criteria": {
       "method": "relative_error",
-      "threshold": 0.0,
+      "threshold": 0.01,
       "stagnation_window": 60
     }
   },
